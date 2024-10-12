@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ffd2d3432eb3944ad38d67804f5afa, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Bertha
+  <Description>k__BackingField: Joannes beloved childhood gun
+  <Icon>k__BackingField: {fileID: 207222245, guid: 5610466fdeda2724cb72446927801ba9, type: 3}
+  <MaxStack>k__BackingField: 1
+  <Usable>k__BackingField: 0
+  <Important>k__BackingField: 1
+  <ExamineImage>k__BackingField: {fileID: 754714527, guid: 27732f5a1f0b3cf47bb3e455f3df483c, type: 3}
