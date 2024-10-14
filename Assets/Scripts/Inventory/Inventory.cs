@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [field: SerializeField] public InventorySlot[] Slots { get; private set; }
+    [field: SerializeField] private InteractMenu _interactMenu;
     
     [field: SerializeField] private GameObject _textBox;
     [field: SerializeField] private TMP_Text _nameText;
@@ -16,8 +17,9 @@ public class Inventory : MonoBehaviour
     [field: SerializeField] private GameObject _container;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        _interactMenu.Select(null);
         _container.SetActive(false);
     }
 
@@ -26,29 +28,24 @@ public class Inventory : MonoBehaviour
     {
         if (PlayerInput.Overworld.OpenInventory.WasPressedThisFrame())
         {
-            PlayerInput.Overworld.Disable();
-            PlayerInput.Inventory.Enable();
-            _container.SetActive(true);
+            UserInterface.Instance.OpenMenu(_container);
         }
-
-        if (PlayerInput.Inventory.CloseInventory.WasPressedThisFrame())
+        
+        if (_container.activeSelf == false && (_interactMenu.gameObject.activeSelf || _textBox.activeSelf))
         {
-            CloseInventory();
+            _interactMenu.Select(null);
+            RemoveText();
         }
     }
-
-    public void CloseInventory()
-    {
-        PlayerInput.Overworld.Enable();
-        PlayerInput.Inventory.Disable();
-        _container.SetActive(false);
-    }
+    
+    
+    
 
     private bool AddItem(Item item)
     {
         foreach (InventorySlot s in Slots)
         {
-            if (s.Item == item && s.Amount + 1 <= s.Item.MaxStack)
+            if (s != null && s.Item == item && s.Amount + 1 <= s.Item.MaxStack)
             {
                 s.Amount++;
                 return true;
@@ -57,7 +54,7 @@ public class Inventory : MonoBehaviour
 
         foreach (InventorySlot s in Slots)
         {
-            if (s.Item != null) continue;
+            if (s == null || s.Item != null) continue;
             
             s.Item = item;
             s.Amount++;
@@ -68,22 +65,17 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public void Add(Item item)
+    public void Add(ItemContainer item)
     {
-        AddItem(item);
-    }
-
-    public void Add(Pickup pickup)
-    {
-        while (AddItem(pickup.Item))
+        while (AddItem(item.Item))
         {
-            if (--pickup.Amount == 0)
+            if (--item.Amount == 0)
             {
-                Destroy(pickup.gameObject);
                 break;
             }
         }
     }
+    
     
 
     public void Move(Inventory other)
@@ -106,7 +98,11 @@ public class Inventory : MonoBehaviour
 
     public void RemoveText()
     {
-        
+        if (_interactMenu.CurrentSlot != null)
+        {
+            DisplayText(_interactMenu.CurrentSlot);
+            return;
+        }
         
         _textBox.SetActive(false);
         _nameText.text = "";

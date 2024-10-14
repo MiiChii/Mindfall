@@ -25,7 +25,7 @@ public class PlayerSwitcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CharacterCurrent.SetCharacter(true);
+        CharacterOther.SetCharacter(true);
         CharacterOther.SetCharacter(false);
     }
 

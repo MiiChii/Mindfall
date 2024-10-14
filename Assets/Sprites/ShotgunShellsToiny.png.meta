@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5610466fdeda2724cb72446927801ba9
+guid: 2088ec8bd57557a4687f9c94c20a080d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inventory_3
+      name: ShotgunShellsToiny_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 19
+        x: 80
+        y: 203
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57e3dfe5a65ab7a41bb79a2637bf645f
-      internalID: 207222245
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inventory_4
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 18
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc9cdb1a915045b45aa7aebffb0bccd1
-      internalID: 667578548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inventory_5
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 18
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c76cbf665831a014d9f81dfbe10e1549
-      internalID: 171626774
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inventory
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 48
-        height: 33
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7b62f6d99d9d2948b0c582ce48eb498
-      internalID: 938120406
+      spriteID: f72d87ff25ac95241ac2112a811b5cc1
+      internalID: -2136945020
       vertices: []
       indices: 
       edges: []
@@ -191,15 +128,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Inventory: 938120406
-      Inventory_1: -142471868
-      Inventory_2: -1665879888
-      Inventory_3: 207222245
-      Inventory_4: 667578548
-      Inventory_5: 171626774
-      Inventory_6: 1746562578
-      Inventory_7: 1117861408
-      Inventory_8: 1924978086
+      ShotgunShellsToiny_0: -2136945020
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
@@ -10,7 +12,7 @@ public class InteractMenu : MonoBehaviour
     [field: SerializeField] private Button _swapButton;
     [field: SerializeField] private Button _moveButton;
 
-    private InventorySlot _slot;
+    public InventorySlot CurrentSlot { get; private set; }
     private bool _swapping;
 
     void Start()
@@ -19,28 +21,39 @@ public class InteractMenu : MonoBehaviour
     }
 
 
+    
+
+
     public void Interact(InventorySlot slot)
     {
         if (_swapping)
         {
             _swapping = false;
-                
-            (slot.Item, _slot.Item) = (_slot.Item, slot.Item);
-            (slot.Amount, _slot.Amount) = (_slot.Amount, slot.Amount);
-            _slot = null;
-            
+            Debug.Log(CurrentSlot + " + " + slot);
+            (slot.ItemContainer, CurrentSlot.ItemContainer) = (CurrentSlot.ItemContainer, slot.ItemContainer);
+
+            Select(null);
             return;
         }
 
 
-        if (slot.Item == null) return;
+        if (slot.Item == null)
+        {
+            Select(null);
+            return;
+        }
         
 
-        _useButton.interactable = slot.Item.Usable;
-        _discardButton.interactable = !slot.Item.Important;
+        _useButton.gameObject.SetActive(slot.Item.Usable);
+        _discardButton.gameObject.SetActive(!slot.Item.Important);
         
-        _slot = slot;
-        gameObject.SetActive(true);
+        Select(slot);
+    }
+
+    public void Select(InventorySlot slot)
+    {
+        CurrentSlot = slot;
+        gameObject.SetActive(slot);
     }
     
     
@@ -53,16 +66,14 @@ public class InteractMenu : MonoBehaviour
     
     public void Discard()
     {
-        _slot.Item = null;
-        _slot.Amount = 0;
-        gameObject.SetActive(false);
+        CurrentSlot.ItemContainer = new ItemContainer();
+        Select(null);
     }
     
-    public void Examine(Image examineImage)
+    public void Examine()
     {
-        examineImage.sprite = _slot.Item.ExamineImage;
-        examineImage.enabled = true;
-        gameObject.SetActive(false);
+        ItemExamineDisplay.Instance.DisplayItem(CurrentSlot.Item);
+        Select(null);
     }
     
     public void Swap()

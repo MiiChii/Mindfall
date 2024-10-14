@@ -62,6 +62,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""59588157-b31b-479f-9ee8-269e8b6fba48"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -240,6 +249,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""OpenInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8c70785-99bb-4a80-b36b-079ba5a973de"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c9b0656-1859-4d5f-a4cf-537a6850c378"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -333,6 +364,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Overworld_Interact = m_Overworld.FindAction("Interact", throwIfNotFound: true);
         m_Overworld_SwitchCharacter = m_Overworld.FindAction("SwitchCharacter", throwIfNotFound: true);
         m_Overworld_OpenInventory = m_Overworld.FindAction("OpenInventory", throwIfNotFound: true);
+        m_Overworld_Shoot = m_Overworld.FindAction("Shoot", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_CloseInventory = m_Inventory.FindAction("CloseInventory", throwIfNotFound: true);
@@ -408,6 +440,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Overworld_Interact;
     private readonly InputAction m_Overworld_SwitchCharacter;
     private readonly InputAction m_Overworld_OpenInventory;
+    private readonly InputAction m_Overworld_Shoot;
     public struct OverworldActions
     {
         private @Controls m_Wrapper;
@@ -416,6 +449,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Overworld_Interact;
         public InputAction @SwitchCharacter => m_Wrapper.m_Overworld_SwitchCharacter;
         public InputAction @OpenInventory => m_Wrapper.m_Overworld_OpenInventory;
+        public InputAction @Shoot => m_Wrapper.m_Overworld_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Overworld; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -437,6 +471,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @OpenInventory.started += instance.OnOpenInventory;
             @OpenInventory.performed += instance.OnOpenInventory;
             @OpenInventory.canceled += instance.OnOpenInventory;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IOverworldActions instance)
@@ -453,6 +490,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @OpenInventory.started -= instance.OnOpenInventory;
             @OpenInventory.performed -= instance.OnOpenInventory;
             @OpenInventory.canceled -= instance.OnOpenInventory;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IOverworldActions instance)
@@ -530,6 +570,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnSwitchCharacter(InputAction.CallbackContext context);
         void OnOpenInventory(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {
